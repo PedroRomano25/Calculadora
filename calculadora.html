@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>CALCULADORA</title>
+        <style>
+            body
+                {
+                    background-color: white;
+                    padding-left:25%;
+                    margin-top: 75px;                    
+                }
+            #calculadora
+                {
+                    width: 680px;
+                    height: 520px;
+                    box-shadow: 0px 1px 10px 0.1px;
+                }
+            #contemCalculadora
+                {
+                    width: 350px;
+                    height: 460px;
+                    background-color: rgba(54,54,54);
+                    padding: 30px 15px 30px 15px;
+                    float: left;
+                }
+            #telaResultado
+                {
+                    width: 313px;
+                    background-color: white;
+                    border-bottom-right-radius: 5px;
+                    border-bottom-left-radius: 5px;
+                    font-family: Arial, Helvetica, sans-serif;
+                    height: 70px;
+                    font-size: 35px;
+                    text-align: right;
+                    font-weight: bold;
+                    border: none;   
+                }
+            .buttonStyle
+                {
+                    width: 78px;
+                    height: 50px;
+                    background-color: white;
+                    border: none;
+                    box-shadow: 0;
+                    float: left;
+                    font-weight: bold;
+                    font-size: 20px;
+                    color: black;
+                }
+            .buttonStyle2
+                {
+                    width: 78px;
+                    height: 50px;
+                    background-color: white;
+                    border: none;
+                    box-shadow: 0;
+                    float: left;
+                    font-weight: bold;
+                    font-size: 20px;
+                    color: #ffa500;
+                }
+            .buttonStyle:hover
+                {
+                    background-color: #ffa500;
+                    transition-duration: 0.2s;
+                    color: white;
+                }
+            .buttonStyle2:hover
+                {
+                    background-color: #ffa500;
+                    transition-duration: 0.2s;
+                    color: black;
+                }
+            #historicoDeCalculo
+                {
+                    width: 313px;
+                    background-color: white;
+                    border-top-right-radius: 5px;
+                    border-top-left-radius: 5px;
+                    height: 40px;
+                    font-size: 20px;
+                    text-align: right;
+                    border: none;    
+                    color: #ffa500;               
+                }
+            #contemHistorico
+                {
+                    width: 270px;
+                    height: 470px;
+                    background-color: rgba(54,54,54);
+                    padding: 20px 15px 30px 15px;
+                    float: left;
+                }
+            #historico1
+                {
+                    width: 255px;
+                    background-color: white;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    padding-right: 10px;
+                    text-align: top;
+                    border-radius: 5px;
+                    height: 440px;
+                    font-size: 20px;
+                    text-align: right;
+                    border: none;    
+                    color: #ffa500;
+                    resize: none;
+                    font-family: Arial, Helvetica, sans-serif;    
+                    overflow: auto;        
+                }
+        </style>
+    </head>
+    <body>   
+        <div id="calculadora">
+            <div id="contemCalculadora">
+                <div style="text-align: center;">
+                    <div style="height: 150px;">
+                        <input type="text" id="historicoDeCalculo" readonly=“true”>
+                        <input type="text" id="telaResultado">
+                    </div>
+                    <div style="text-align: center; margin-left: 18px;">
+                        <div>
+                            <button class="buttonStyle2" style="border-top-left-radius: 5px;" onclick="operador('%')">%</button>
+                            <button class="buttonStyle2" onclick="limparTela('CE')">CE</button>
+                            <button class="buttonStyle2" onclick="limparTela('C')">C</button>
+                            <button class="buttonStyle2" style="border-top-right-radius: 5px;" onclick="backspace()"><i class="material-icons">backspace</i></button>
+                        </div>
+                        <div>
+                            <button class="buttonStyle2" onclick="operador('¹/')">¹/x</button>
+                            <button class="buttonStyle2" onclick="operador('²')">x²</button>
+                            <button class="buttonStyle2" onclick="operador('²√')">²√x</button>
+                            <button class="buttonStyle2" onclick="operador(' / ')">/</button>
+                        </div>
+                        <div>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(7)">7</button>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(8)">8</button>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(9)">9</button>
+                            <button class="buttonStyle2" onclick="operador(' x ')">x</button>
+                        </div>
+                        <div>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(4)">4</button>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(5)">5</button>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(6)">6</button>
+                            <button class="buttonStyle2" onclick="operador(' - ')">-</button>
+                        </div>
+                        <div>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(1)">1</button>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(2)">2</button>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(3)">3</button>
+                            <button class="buttonStyle2" onclick="operador(' + ')">+</button>
+                        </div>
+                        <div>
+                            <button class="buttonStyle2" style="border-bottom-left-radius: 5px;" onclick="operador('+/-')">+/-</button>
+                            <button class="buttonStyle" onclick="insereNumeroNaTela(0)">0</button>
+                            <button class="buttonStyle2" onclick="insereNumeroNaTela('.')">.</button>
+                            <button class="buttonStyle" style="border-bottom-right-radius: 5px; background-color: #ffa500; color: white; border: none;" onclick="resutlado()">=</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="contemHistorico">
+                <div id="historico1"></div>
+            </div>
+        </div>
+        <script>
+                //VARIAVEIS QUE VÃO SER USADAS PARA DEFINIR.
+
+                // VARIAVEIS QUE RECEBEM AS TELAS QUE SERÃO PREENCHIDAS.
+                var telaResultado = document.getElementById('telaResultado');
+                var telaHistorico = document.getElementById('historicoDeCalculo');
+                var telaHistorico1 = document.getElementById('historico1');
+
+                // ARRAY COM O VALOR DA TELA PRINCIPAL, PARA USAR O BACKSPACE.
+                var valorTelaResultado = [];
+                var contarResultado = 1;
+
+                // VARIAVEIS QUE RECEBEM OS DOIS NÚMEROS QUE SERÃO UTILIZADOS NAS OPERAÇÕES.
+                var valorFinal = Number(document.getElementById('telaResultado').value);
+                var valorFinal2 = 0;
+
+                // VARIAVEL QUE RECEBE O TIPO DE OPERACAO QUE SERA UTILIZADO, E TAMBÉM AUXILIA NO CALCULO DO RESUTLADO.
+                var operacao = 0;
+
+                // VARIAVEIS PARA VALIDAR SE A ULTIMA OPERAÇÃO JÁ FOI REALIZADA, PARA QUE QUANDO COMEÇAR A NOVA OPERAÇÃO NÃO PRECISE LIMPAR A TELA USANDO O C, BASTA CLICAR NO NÚMERO.
+                var numeroAnterior = 0;
+                var validarHistorico = 1;
+
+                // RESULTADO FINAL DA OPERAÇÃO.
+                var resultadoFinal = 0;
+
+                // INSERIR O NÚMEROS NA TELA
+                function insereNumeroNaTela(n1)
+                    {
+                        if(telaHistorico.value == validarHistorico)
+                            {
+                                numeroAnterior = telaResultado.value;
+                                telaResultado.value = '';
+                                telaHistorico.value = '';
+                                telaResultado.value = telaResultado.value+=n1;
+
+                            }
+                        else
+                            {
+                                telaResultado.value = telaResultado.value+=n1;
+                                valorTelaResultado.push(n1);
+                            }
+                    }            
+                // LIMPA A TELA / CE OU C
+                function limparTela(n1)
+                    {
+                        if(n1 == 'CE')
+                            {
+                                telaResultado.value = '';
+                                telaHistorico.value = '';
+                                valorTelaResultado = [];
+                                telaHistorico1.innerHTML = '';
+                            }
+                        else
+                            {
+                                telaResultado.value = '';
+                                telaHistorico.value = '';
+                                valorTelaResultado = [];
+                            }
+                    }               
+                // LIMPA O ULTIMO NÚMERO ESCRITO / BACKSPACE
+                function backspace()
+                    {
+                        if(telaHistorico.value=='')
+                            {
+                                var numInicial = document.getElementById('telaResultado')
+                                telaResultado.value = '';
+                                valorTelaResultado.pop()
+                                for(var aux = 0;aux<valorTelaResultado.length;aux++)
+                                    {
+                                        numInicial.value = numInicial.value + valorTelaResultado[aux];
+                                    }
+                            }          
+                    }
+                // INSERE O OPERADOR NA TELA / ABRANJE TODAS AS OPERAÇÕES
+                function operador(n1)
+                    {
+                        valorFinal = Number(document.getElementById('telaResultado').value);
+                        operacao = n1;
+                        telaResultado.value = '';
+                        
+                        if(operacao == '¹/'||operacao == '²√')
+                            {    
+                                telaHistorico.value = n1 + valorFinal;
+                            }
+                        else
+                            {
+                                if(operacao == '²' || operacao == '+/-')
+                                    {
+                                        telaResultado.value = valorFinal;
+                                        telaHistorico.value = valorFinal + n1;
+                                    }
+                                else
+                                    {
+                                        telaHistorico.value = valorFinal + n1;
+                                    }
+                            }
+                    }
+                // REALIZA A OPERAÇÃO
+                function resutlado()
+                    {
+                        contarResultado = contarResultado+1;
+                        valorFinal2 = Number(document.getElementById('telaResultado').value);
+                        switch(operacao)
+                            {
+                                /*
+                                    FORMATO:
+                                        PREENCHE PRIMEIRO A TELA DE RESULTADO:
+                                                telaResultado.value = valorFinal+valorFinal2;
+                                        DEPOIS A TELA DE HISTORICO:
+                                                telaHistorico.value = telaHistorico.value + valorFinal2 + ' = '; 
+                                        POR ULTIMO O HISTORICO1 DO LADO:
+                                                telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${valorFinal+valorFinal2}</p>${telaHistorico1.innerHTML}`
+                                */
+                                case ' + ':
+                                    telaResultado.value = valorFinal+valorFinal2;
+                                    telaHistorico.value = telaHistorico.value + valorFinal2 + ' = '; 
+                                    validarHistorico = telaHistorico.value;
+                                    telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${valorFinal+valorFinal2}</p>${telaHistorico1.innerHTML}`
+                                break
+                                case ' - ':
+                                    telaResultado.value = valorFinal-valorFinal2;
+                                    telaHistorico.value = telaHistorico.value + valorFinal2 + ' = ';
+                                    validarHistorico = telaHistorico.value;
+                                    telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${valorFinal-valorFinal2}</p>${telaHistorico1.innerHTML}` 
+                                break
+                                case ' x ':
+                                    telaResultado.value = valorFinal*valorFinal2;
+                                    telaHistorico.value = telaHistorico.value + valorFinal2 + ' = ';
+                                    validarHistorico = telaHistorico.value;
+                                    telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${valorFinal*valorFinal2}</p>${telaHistorico1.innerHTML}` 
+                                break
+                                case ' / ':
+                                    telaResultado.value = valorFinal/valorFinal2;
+                                    telaHistorico.value = telaHistorico.value + valorFinal2 + ' = ';
+                                    validarHistorico = telaHistorico.value;
+                                    telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${valorFinal/valorFinal2}</p>${telaHistorico1.innerHTML}` 
+                                break
+                                case '+/-':
+                                    telaResultado.value = valorFinal*-1;
+                                    telaHistorico.value = '';
+                                    validarHistorico = 1;
+                                    telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${valorFinal*-1}</p>${telaHistorico1.innerHTML}`
+                                break
+                                case '¹/':
+                                    telaResultado.value = 1/valorFinal;
+                                    telaHistorico.value = '1/'+valorFinal+ ' = ';
+                                    validarHistorico = telaHistorico.value;
+                                    telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${1/valorFinal}</p>${telaHistorico1.innerHTML}` 
+                                break
+                                case '²√':
+                                var valorMultiplicacao = 0;
+                                    for(var auxCalcular = 1;valorMultiplicacao<=valorFinal;auxCalcular++)
+                                        {
+                                            valorMultiplicacao  = auxCalcular*auxCalcular;
+                                            if(valorMultiplicacao==valorFinal)
+                                                {
+                                                    telaHistorico.value = '²√'+valorFinal+ ' = ';
+                                                    validarHistorico = telaHistorico.value; 
+                                                    telaResultado.value = auxCalcular;
+                                                    break
+                                                }
+                                            else
+                                                {
+                                                    var divisor = Number(1);
+                                                    for(var auxCalcular2 = 1;auxCalcular2<6;auxCalcular2++)
+                                                        {
+                                                            divisor = (divisor+(valorFinal/divisor))/2;
+                                                            telaResultado.value = divisor;
+                                                            telaHistorico.value = '²√'+valorFinal+ ' = ';
+                                                            validarHistorico = telaHistorico.value;
+                                                        }
+                                                }
+                                        }
+                                        telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${telaResultado.value}</p>${telaHistorico1.innerHTML}`
+                                break
+                                case '²':
+                                    telaResultado.value = valorFinal*valorFinal;
+                                    telaHistorico.value = valorFinal+'² = ';
+                                    validarHistorico = telaHistorico.value;
+                                    telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${valorFinal*valorFinal2}</p>${telaHistorico1.innerHTML}` 
+                                break
+                                case '%':
+                                    telaResultado.value = valorFinal%valorFinal2;
+                                    telaHistorico.value = telaHistorico.value + valorFinal2 + ' = ';
+                                    validarHistorico = telaHistorico.value;
+                                    telaHistorico1.innerHTML = `${telaHistorico.value}<p style="font-size: 25px; color: black; font-weight: bold;">${valorFinal%valorFinal2}</p>${telaHistorico1.innerHTML}` 
+                                break
+                            }
+                    }              
+        </script>      
+    </body>
+</html>
